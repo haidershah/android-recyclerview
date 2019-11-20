@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val recyclerView = findViewById<RecyclerView>(R.id.recycler_view)
-        displayListView(recyclerView)
+        displayGridViewWithHeader(recyclerView)
     }
 
     private fun displayListView(recyclerView: RecyclerView) {
@@ -50,6 +50,29 @@ class MainActivity : AppCompatActivity() {
 
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
+
+        // add data
+        val randomNumbers = mutableListOf<RandomNumber>()
+        for (i in 1..19) {
+            randomNumbers.add(RandomNumber(Random.nextInt(0, 100)))
+        }
+        adapter.addData(randomNumbers)
+    }
+
+    private fun displayGridViewWithHeader(recyclerView: RecyclerView) {
+        val adapter = RandomNumberHeaderAdapter()
+        val manager = GridLayoutManager(this, 3)
+        manager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+            override fun getSpanSize(position: Int): Int {
+                return when (position) {
+                    0 -> 3
+                    else -> 1
+                }
+            }
+        }
+
+        recyclerView.adapter = adapter
+        recyclerView.layoutManager = manager
 
         // add data
         val randomNumbers = mutableListOf<RandomNumber>()
