@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val recyclerView = findViewById<RecyclerView>(R.id.recycler_view)
-        displayListViewWithHeader(recyclerView)
+        displayListView(recyclerView)
     }
 
     private fun displayListView(recyclerView: RecyclerView) {
@@ -25,6 +25,7 @@ class MainActivity : AppCompatActivity() {
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
 
+        findViewById<Button>(R.id.add_btn).visibility = View.VISIBLE
         findViewById<Button>(R.id.add_btn).setOnClickListener {
             val randomNumber = RandomNumber(Random.nextInt(0, 100))
             adapter.addData(randomNumber)
@@ -37,6 +38,7 @@ class MainActivity : AppCompatActivity() {
         recyclerView.adapter = adapter
         recyclerView.layoutManager = GridLayoutManager(this, 3)
 
+        findViewById<Button>(R.id.add_btn).visibility = View.VISIBLE
         findViewById<Button>(R.id.add_btn).setOnClickListener {
             val randomNumber = RandomNumber(Random.nextInt(0, 100))
             adapter.addData(randomNumber)
@@ -48,8 +50,6 @@ class MainActivity : AppCompatActivity() {
 
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
-
-        findViewById<Button>(R.id.add_btn).visibility = View.GONE
 
         // add data
         val randomNumbers = mutableListOf<RandomNumber>()
