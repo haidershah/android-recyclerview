@@ -14,14 +14,27 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val recyclerView = findViewById<RecyclerView>(R.id.recycler_view)
+        displayGridView(recyclerView)
+    }
+
+    private fun displayListView(recyclerView: RecyclerView) {
         val adapter = RandomNumberAdapter()
 
-        val recyclerView = findViewById<RecyclerView>(R.id.recycler_view)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-        // to display in grid format
-//        recyclerView.layoutManager = GridLayoutManager(this, 3)
+        findViewById<Button>(R.id.add_btn).setOnClickListener {
+            val randomNumber = RandomNumber(Random.nextInt(0, 100))
+            adapter.addData(randomNumber)
+        }
+    }
+
+    private fun displayGridView(recyclerView: RecyclerView) {
+        val adapter = RandomNumberAdapter()
+
+        recyclerView.adapter = adapter
+        recyclerView.layoutManager = GridLayoutManager(this, 3)
 
         findViewById<Button>(R.id.add_btn).setOnClickListener {
             val randomNumber = RandomNumber(Random.nextInt(0, 100))
