@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val recyclerView = findViewById<RecyclerView>(R.id.recycler_view)
-        displayGridViewWithHeader(recyclerView)
+        displayHorizontalGridView(recyclerView)
     }
 
     private fun displayListView(recyclerView: RecyclerView) {
@@ -32,11 +32,37 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun displayHorizontalListView(recyclerView: RecyclerView) {
+        val adapter = RandomNumberAdapter()
+
+        recyclerView.adapter = adapter
+        recyclerView.layoutManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
+
+        findViewById<Button>(R.id.add_btn).visibility = View.VISIBLE
+        findViewById<Button>(R.id.add_btn).setOnClickListener {
+            val randomNumber = RandomNumber(Random.nextInt(0, 100))
+            adapter.addData(randomNumber)
+        }
+    }
+
     private fun displayGridView(recyclerView: RecyclerView) {
         val adapter = RandomNumberAdapter()
 
         recyclerView.adapter = adapter
         recyclerView.layoutManager = GridLayoutManager(this, 3)
+
+        findViewById<Button>(R.id.add_btn).visibility = View.VISIBLE
+        findViewById<Button>(R.id.add_btn).setOnClickListener {
+            val randomNumber = RandomNumber(Random.nextInt(0, 100))
+            adapter.addData(randomNumber)
+        }
+    }
+
+    private fun displayHorizontalGridView(recyclerView: RecyclerView) {
+        val adapter = RandomNumberAdapter()
+
+        recyclerView.adapter = adapter
+        recyclerView.layoutManager = GridLayoutManager(this, 5, RecyclerView.HORIZONTAL, false)
 
         findViewById<Button>(R.id.add_btn).visibility = View.VISIBLE
         findViewById<Button>(R.id.add_btn).setOnClickListener {
