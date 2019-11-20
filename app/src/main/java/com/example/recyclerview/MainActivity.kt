@@ -15,7 +15,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val recyclerView = findViewById<RecyclerView>(R.id.recycler_view)
-        displayGridView(recyclerView)
+        displayListView(recyclerView)
     }
 
     private fun displayListView(recyclerView: RecyclerView) {
@@ -40,5 +40,9 @@ class MainActivity : AppCompatActivity() {
             val randomNumber = RandomNumber(Random.nextInt(0, 100))
             adapter.addData(randomNumber)
         }
+    }
+
+    private fun displayListViewWithHeader(recyclerView: RecyclerView) {
+
     }
 }
