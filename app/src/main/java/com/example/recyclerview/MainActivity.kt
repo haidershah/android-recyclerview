@@ -1,6 +1,7 @@
 package com.example.recyclerview
 
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
@@ -15,7 +16,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val recyclerView = findViewById<RecyclerView>(R.id.recycler_view)
-        displayListView(recyclerView)
+        displayListViewWithHeader(recyclerView)
     }
 
     private fun displayListView(recyclerView: RecyclerView) {
@@ -43,6 +44,18 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun displayListViewWithHeader(recyclerView: RecyclerView) {
+        val adapter = RandomNumberHeaderAdapter()
 
+        recyclerView.adapter = adapter
+        recyclerView.layoutManager = LinearLayoutManager(this)
+
+        findViewById<Button>(R.id.add_btn).visibility = View.GONE
+
+        // add data
+        val randomNumbers = mutableListOf<RandomNumber>()
+        for (i in 1..19) {
+            randomNumbers.add(RandomNumber(Random.nextInt(0, 100)))
+        }
+        adapter.addData(randomNumbers)
     }
 }
